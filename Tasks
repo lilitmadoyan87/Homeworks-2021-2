@@ -1,0 +1,122 @@
+//  Task1  Given three numbers a, b (a ≤ b) and num. Create an array of evenly spaced numbers by the given num length over the specified interval (from a to b). 
+// a + (num -1)*step = b
+
+function createNewArray(a, b, num) {
+  let arr = [];
+  let step = (b-a)/(num -1)
+  for(let i = a; i <= b; i += step) {
+    arr.push(i)
+  }
+  return arr;
+}
+
+let a = 10;
+let b = 100;
+let num = 3;
+console.log(createNewArray(a, b, num));
+
+
+// Task 2 Recursian chstacvec
+// Given an array of numbers. Find the index of the second maximum element.
+
+function getSecondMaxElement(arr) {
+  let max = arr[0];
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] > max) {
+      max = arr[i]
+    }
+  }
+  arr.splice(arr.indexOf(max), 1);
+  max = arr[0]
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] > max) {
+      max = arr[i]
+    }
+  }
+  return max;
+}
+
+let arr1 = [1, 29, 5, 24, 35, -99];
+console.log(getSecondMaxElement(arr1));
+
+
+// Task 3 
+// Given an array of numbers, padding amount and repeat count. Pad the array in the following way: the padding amount specifies how many elements should be taken from the array edges, the repeat amount specifies how many times the pad should be repeated. Also, you should check that padding amount <= length of array.
+
+function padding(arr, padAmount, repeat) {
+  if(padAmount <= arr.length) {
+  let str = arr.join('');
+  let padStr1 ='';
+  let padStr2 = '';
+  for(let i = 0, j = str.length-padAmount; i < padAmount, j < str.length; i++, j++) {
+      padStr1 += str[i]
+      padStr2 += str[j] 
+  }
+  let str1 = str.padStart(str.length + repeat, padStr1)
+  let str2 = str1.padEnd(str1.length + repeat, padStr2)
+  let padArray = str2.split('')
+  return padArray;
+  } else{
+    return 'Invalid padding amount'
+  }
+}
+
+let arr = [1, 2, 3, 4, 5]
+let padAmount = 1;
+let repeat = 3;
+console.log(padding(arr, padAmount, repeat))
+
+
+// Task 4
+// Write a function which receives an array and a number as arguments and returns a new array from the elements of the given array which are larger than the given number.
+
+function getNewArray(arr, num) {
+  let arr1 = [];
+  for(let el of arr) {
+    if(el >= num ) {
+      arr1.push(el)
+    } 
+  }
+  if(arr1 == 0){ 
+   return 'Such values do not exist'
+  } else{
+   return arr1.sort(function(a, b){return a - b})
+  }
+}
+
+let arr = [2, 4, 10, 0, -3, 4, 35, 6, 5, 7];
+let num = 4;
+console.log(getNewArray(arr, num));
+
+
+// Task 5
+// Write a function, which receives two numbers as arguments and finds all numbers between them such that each digit of the number is even. The numbers obtained should be printed in a comma-separated sequence on a single line.
+
+function getNumbersWithEvenDigits(num1, num2) {
+  let arr = [];
+  let num = 'Such numbers does not exist';
+  for(let i = num1; i <= num2; i++) {
+    if(isDigitOfNumberEven(i) === true) {
+      arr.push(i);
+      num = arr.join(',');
+    }
+  }
+  return num;
+}
+
+function isDigitOfNumberEven(num) {
+  let numStr = String(num);
+  for (i = 0; i < numStr.length; i++) {
+    if(numStr[i] % 2 === 1) {
+      return;
+      break;
+    }
+  }
+  return true;
+}
+
+let num1 = 20;
+let num2 = 199;
+console.log(getNumbersWithEvenDigits(num1, num2));
+
+
